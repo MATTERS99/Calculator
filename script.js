@@ -5,8 +5,8 @@ ab.forEach(item => {
   item.addEventListener("click", () => {
     let r = item.textContent;
     console.log(r)
-    
-    if (r != '+' && r != '×' && r != '%' && r != '÷' && r != '−' && r != '=' && r != '±') {
+
+    if (r != '+' && r != '×' && r != '%' && r != '÷' && r != '−' && r != '=' && r != '±' && r !== "DEL" && r !== "AC" && r !== ".") {
       s += r
     }
     if (r === "=") {
@@ -23,8 +23,51 @@ ab.forEach(item => {
         s += r;
       }
     }
-    y.textContent=s
-  })
+    if (r === "±") {
+      let M = s.split('')
+      let x = M.lastIndexOf('+');
+      let q = M.lastIndexOf('−');
+      if (x===-1&&q===-1){
+         s='−'+s
+      }
+      else if (x === -1) {
+        M[q] = '+'
+        s=M.join('')}
+      else if (q === -1) {
+        M[x] = '−'
+        s=M.join('')}
+
+      else if (x > q) {
+        M[x] = '−'
+        s=M.join('')
+      } else if (q>x){
+        M[q]='+'
+        s=M.join('')
+      }else{
+        alert("Invalid")
+      }}
+
+
+      if (r === '%') {
+
+        s = String(s / 100)
+      }
+      if (r === ".") {
+        s += r
+      }
+
+      if (r === "DEL") {
+        s = s.slice(0, -1)
+
+      }
+      if (r === "AC") {
+        s="";
+
+      }
+
+      y.textContent = s || 0
+
+    })
 });
 
 
