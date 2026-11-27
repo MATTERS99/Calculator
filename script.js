@@ -4,7 +4,19 @@ const A = Array.from(ab)
 A.forEach(item => {
   item.addEventListener("click", () => operation(item))
 })
-
+document.addEventListener("keydown", (event) => {
+  let k = event.key
+  if (k === "Backspace") {
+    event.preventDefault()
+    k = "DEL"
+  }
+  if (k === "Escape") k = "AC"
+  if (k === "Enter") k = "="
+  if (k === "*") k = "×"
+  if (k === "/") k = "÷"
+  let item = A.find(item => item.textContent === k)
+  if (item) operation(item)
+})
 let s = ""
 let B = "";
 let error = false;
